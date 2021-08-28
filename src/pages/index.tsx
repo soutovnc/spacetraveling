@@ -1,4 +1,4 @@
-import ptBR from 'date-fns/locale/pt-BR';
+import { ptBR } from 'date-fns/locale';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -32,6 +32,7 @@ interface PostPagination {
 
 interface HomeProps {
   postsPagination: PostPagination;
+  preview: boolean;
 }
 
 export default function Home({
@@ -118,10 +119,9 @@ export default function Home({
   );
 }
 
-export const getStaticProps: GetStaticProps<HomeProps> = async ({
-  preview = false,
-  previewData,
-}) => {
+export async function getStaticProps({
+  preview = false, previewData,
+}) {
   const prismic = getPrismicClient();
   const postsResponse = await prismic.query(
     [Prismic.predicates.at('document.type', 'post')],
@@ -153,4 +153,4 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
       preview,
     },
   };
-};
+}

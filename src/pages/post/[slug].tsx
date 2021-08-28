@@ -1,14 +1,20 @@
-import { parseISO } from 'date-fns';
-import ptBR from 'date-fns/esm/locale/pt-BR/index.js';
+import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
+import { parseISO, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { format } from 'prettier';
+import { useRouter } from 'next/router'
 
 import { RichText } from 'prismic-dom';
-import { FiCalendar, FiClock, FiUser } from 'react-icons/fi';
+import Prismic from '@prismicio/client'
+
 
 import { getPrismicClient } from '../../services/prismic';
+
+import Comments from '../../components/Comments';
+import Header from '../../components/Header'
+import PreviewButton from '../../components/PreviewButton'
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
